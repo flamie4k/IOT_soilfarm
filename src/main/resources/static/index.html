@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Farm IoT Monitor - Real-time Dashboard</title>
+    <title>AgroSense</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon" type="image/x-icon" href="css/favicon.ico">
 </head>
 <body>
     <div class="background-animation"></div>
@@ -17,14 +18,15 @@
                 <div class="logo-section">
                     <div class="logo-icon">🌾</div>
                     <div>
-                        <h1 class="title">Farm IoT Monitor</h1>
-                        <p class="subtitle">Real-time Soil & Climate Monitoring System</p>
+                        <h1 class="title">AgroSense</h1>
+                        <p class="subtitle">Real-time farm monitoring system</p>
                     </div>
                 </div>
-                <div class="connection-status">
+                <!--<div class="connection-status">
                     <div class="status-indicator online"></div>
                     <span>Live</span>
                 </div>
+            -->
             </div>
         </header>
 
@@ -107,12 +109,12 @@
             </div>
         </div>
 
-        <!-- Chart Section -->
+        <!-- Readings List Section -->
         <div class="chart-container">
             <div class="chart-header">
                 <div>
-                    <h2 class="chart-title">Historical Data Trends</h2>
-                    <p class="chart-subtitle">Last 10 sensor readings</p>
+                    <h2 class="chart-title">Recent Readings</h2>
+                    <p class="chart-subtitle">Last 10 readings</p>
                 </div>
                 <div class="last-update">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -122,14 +124,14 @@
                     <span id="time">--</span>
                 </div>
             </div>
-            <div class="chart-wrapper">
-                <canvas id="soilChart"></canvas>
+            <div class="readings-list" id="readingsList">
+                <p style="text-align: center; color: #999; padding: 40px;">Loading readings...</p>
             </div>
         </div>
 
         <!-- Footer -->
         <footer class="dashboard-footer">
-            <p>🌱 Powered by IoT Technology | Real-time Agricultural Monitoring</p>
+            <p>By TeamZero | EverestEngineeringCollege</p>
         </footer>
     </div>
 

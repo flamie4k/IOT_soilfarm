@@ -1,5 +1,3 @@
-let soilChart;
-
 async function fetchLatestData() {
     try {
         const response = await fetch('/api/sensor/latest');
@@ -100,148 +98,54 @@ async function fetchHistoricalData() {
         const allData = await response.json();
         
         // Take last 10 readings
-        const last10 = allData.slice(0, 10).reverse();
-        const labels = last10.map(d => new Date(d.timestamp).toLocaleTimeString());
-        const soilValues = last10.map(d => d.soilMoisture);
-        const tempValues = last10.map(d => d.temperature);
-        const humidityValues = last10.map(d => d.humidity);
+        const last10 = allData.slice(0, 10);
         
-        if (!soilChart) {
-            const ctx = document.getElementById('soilChart').getContext('2d');
-            soilChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: labels,
-                    datasets: [
-                        {
-                            label: 'Soil Moisture (%)',
-                            data: soilValues,
-                            borderColor: '#8B4513',
-                            backgroundColor: 'rgba(139, 69, 19, 0.1)',
-                            tension: 0.4,
-                            fill: true,
-                            borderWidth: 3,
-                            pointRadius: 5,
-                            pointHoverRadius: 7,
-                            pointBackgroundColor: '#8B4513',
-                            pointBorderColor: '#fff',
-                            pointBorderWidth: 2
-                        },
-                        {
-                            label: 'Temperature (°C)',
-                            data: tempValues,
-                            borderColor: '#F56565',
-                            backgroundColor: 'rgba(245, 101, 101, 0.1)',
-                            tension: 0.4,
-                            fill: true,
-                            borderWidth: 3,
-                            pointRadius: 5,
-                            pointHoverRadius: 7,
-                            pointBackgroundColor: '#F56565',
-                            pointBorderColor: '#fff',
-                            pointBorderWidth: 2
-                        },
-                        {
-                            label: 'Humidity (%)',
-                            data: humidityValues,
-                            borderColor: '#4299E1',
-                            backgroundColor: 'rgba(66, 153, 225, 0.1)',
-                            tension: 0.4,
-                            fill: true,
-                            borderWidth: 3,
-                            pointRadius: 5,
-                            pointHoverRadius: 7,
-                            pointBackgroundColor: '#4299E1',
-                            pointBorderColor: '#fff',
-                            pointBorderWidth: 2
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    interaction: {
-                        mode: 'index',
-                        intersect: false,
-                    },
-                    plugins: {
-                        legend: {
-                            display: true,
-                            position: 'top',
-                            labels: {
-                                padding: 20,
-                                font: {
-                                    size: 13,
-                                    weight: '600'
-                                },
-                                usePointStyle: true,
-                                pointStyle: 'circle'
-                            }
-                        },
-                        tooltip: {
-                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                            padding: 12,
-                            titleFont: {
-                                size: 14,
-                                weight: 'bold'
-                            },
-                            bodyFont: {
-                                size: 13
-                            },
-                            borderColor: 'rgba(255, 255, 255, 0.2)',
-                            borderWidth: 1
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            max: 100,
-                            grid: {
-                                color: 'rgba(0, 0, 0, 0.05)',
-                                drawBorder: false
-                            },
-                            ticks: {
-                                font: {
-                                    size: 12,
-                                    weight: '500'
-                                },
-                                color: '#718096',
-                                callback: function(value) {
-                                    return value + '%';
-                                }
-                            }
-                        },
-                        x: {
-                            grid: {
-                                display: false,
-                                drawBorder: false
-                            },
-                            ticks: {
-                                font: {
-                                    size: 11,
-                                    weight: '500'
-                                },
-                                color: '#718096',
-                                maxRotation: 45,
-                                minRotation: 45
-                            }
-                        }
-                    },
-                    animation: {
-                        duration: 750,
-                        easing: 'easeInOutQuart'
-                    }
-                }
-            });
-        } else {
-            soilChart.data.labels = labels;
-            soilChart.data.datasets[0].data = soilValues;
-            soilChart.data.datasets[1].data = tempValues;
-            soilChart.data.datasets[2].data = humidityValues;
-            soilChart.update('active');
+        const listContainer = document.getElementById('readingsList');
+        
+        if (last10.length === 0) {
+            listContainer.innerHTML = '<p style="text-align: center; color: #999; padding: 40px;">No readings available yet</p>';
+            return;
         }
+        
+        // Build the list HTML
+        let listHTML = '';
+        last10.forEach((reading, index) => {
+            const timestamp = new Date(reading.timestamp);
+            listHTML += `
+                <div class="reading-item" style="animation-delay: ${index * 0.05}s">
+                    <div class="reading-field">
+                        <span class="reading-label">💧 Soil Moisture</span>
+                        <span class="reading-value">${reading.soilMoisture.toFixed(1)}%</span>
+                    </div>
+                    <div class="reading-field">
+                        <span class="reading-label">🌡️ Temperature</span>
+                        <span class="reading-value">${reading.temperature.toFixed(1)}°C</span>
+                    </div>
+                    <div class="reading-field">
+                        <span class="reading-label">💨 Humidity</span>
+                        <span class="reading-value">${reading.humidity.toFixed(1)}%</span>
+                    </div>
+                    <div class="reading-field">
+                        <span class="reading-label">⚙️ Pump Status</span>
+                        <span class="reading-value">${reading.pumpStatus || 'N/A'}</span>
+                    </div>
+                    <div class="reading-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                        ${timestamp.toLocaleDateString()} at ${timestamp.toLocaleTimeString()}
+                    </div>
+                </div>
+            `;
+        });
+        
+        listContainer.innerHTML = listHTML;
+        
     } catch (err) {
         console.error("Error fetching historical data:", err);
+        document.getElementById('readingsList').innerHTML = 
+            '<p style="text-align: center; color: #e53e3e; padding: 40px;">Error loading readings</p>';
     }
 }
 

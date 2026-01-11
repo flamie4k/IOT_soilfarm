@@ -13,10 +13,11 @@ public class SensorData {
     private double soilMoisture;
     private double temperature;
     private double humidity;
+    private String pumpStatus;  // ← ADD THIS FIELD
 
     private LocalDateTime timestamp;
 
-    // ✅ Add getters and setters
+    // Getters and setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -28,6 +29,9 @@ public class SensorData {
 
     public double getHumidity() { return humidity; }
     public void setHumidity(double humidity) { this.humidity = humidity; }
+
+    public String getPumpStatus() { return pumpStatus; }  // ← ADD THIS
+    public void setPumpStatus(String pumpStatus) { this.pumpStatus = pumpStatus; }  // ← ADD THIS
 
     public LocalDateTime getTimestamp() { return timestamp; }
     public void setTimestamp(LocalDateTime timestamp) { this.timestamp = timestamp; }
