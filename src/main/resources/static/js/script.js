@@ -114,19 +114,19 @@ async function fetchHistoricalData() {
             listHTML += `
                 <div class="reading-item" style="animation-delay: ${index * 0.05}s">
                     <div class="reading-field">
-                        <span class="reading-label">💧 Soil Moisture</span>
+                        <span class="reading-label">Soil Moisture</span>
                         <span class="reading-value">${reading.soilMoisture.toFixed(1)}%</span>
                     </div>
                     <div class="reading-field">
-                        <span class="reading-label">🌡️ Temperature</span>
+                        <span class="reading-label">Temperature</span>
                         <span class="reading-value">${reading.temperature.toFixed(1)}°C</span>
                     </div>
                     <div class="reading-field">
-                        <span class="reading-label">💨 Humidity</span>
+                        <span class="reading-label">Humidity</span>
                         <span class="reading-value">${reading.humidity.toFixed(1)}%</span>
                     </div>
                     <div class="reading-field">
-                        <span class="reading-label">⚙️ Pump Status</span>
+                        <span class="reading-label">Pump Status</span>
                         <span class="reading-value">${reading.pumpStatus || 'N/A'}</span>
                     </div>
                     <div class="reading-time">
