@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farm IoT Monitor - Real-time Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="background-animation"></div>
+    
+    <div class="container">
+        <!-- Header Section -->
+        <header class="dashboard-header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo-icon">🌾</div>
+                    <div>
+                        <h1 class="title">Farm IoT Monitor</h1>
+                        <p class="subtitle">Real-time Soil & Climate Monitoring System</p>
+                    </div>
+                </div>
+                <div class="connection-status">
+                    <div class="status-indicator online"></div>
+                    <span>Live</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Dashboard Grid -->
+        <div class="dashboard-grid">
+            <!-- Soil Moisture Card -->
+            <div class="sensor-card soil-card">
+                <div class="card-header">
+                    <div class="icon-wrapper soil-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="card-title">Soil Moisture</h3>
+                        <p class="card-subtitle">Volumetric Water Content</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="main-value">
+                        <span id="soil" class="value">--</span>
+                        <span class="unit">%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div id="soil-progress" class="progress-fill soil-progress"></div>
+                    </div>
+                    <div class="status-badge" id="soil-status">Loading...</div>
+                </div>
+            </div>
+
+            <!-- Temperature Card -->
+            <div class="sensor-card temp-card">
+                <div class="card-header">
+                    <div class="icon-wrapper temp-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="card-title">Temperature</h3>
+                        <p class="card-subtitle">Ambient Air Temperature</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="main-value">
+                        <span id="temp" class="value">--</span>
+                        <span class="unit">°C</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div id="temp-progress" class="progress-fill temp-progress"></div>
+                    </div>
+                    <div class="status-badge" id="temp-status">Loading...</div>
+                </div>
+            </div>
+
+            <!-- Humidity Card -->
+            <div class="sensor-card humidity-card">
+                <div class="card-header">
+                    <div class="icon-wrapper humidity-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="card-title">Humidity</h3>
+                        <p class="card-subtitle">Relative Air Humidity</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="main-value">
+                        <span id="humidity" class="value">--</span>
+                        <span class="unit">%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div id="humidity-progress" class="progress-fill humidity-progress"></div>
+                    </div>
+                    <div class="status-badge" id="humidity-status">Loading...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chart Section -->
+        <div class="chart-container">
+            <div class="chart-header">
+                <div>
+                    <h2 class="chart-title">Historical Data Trends</h2>
+                    <p class="chart-subtitle">Last 10 sensor readings</p>
+                </div>
+                <div class="last-update">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12 6 12 12 16 14"/>
+                    </svg>
+                    <span id="time">--</span>
+                </div>
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="soilChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="dashboard-footer">
+            <p>🌱 Powered by IoT Technology | Real-time Agricultural Monitoring</p>
+        </footer>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

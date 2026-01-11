@@ -1,0 +1,1150 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Animated Background */
+.background-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(138, 43, 226, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 40% 20%, rgba(72, 61, 139, 0.3) 0%, transparent 50%);
+    animation: float 20s ease-in-out infinite;
+    z-index: -1;
+}
+
+@keyframes float {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(30px, -30px) scale(1.1); }
+    66% { transform: translate(-20px, 20px) scale(0.9); }
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+/* Header Styles */
+.dashboard-header {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    margin-bottom: 30px;
+    animation: slideDown 0.6s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo-icon {
+    font-size: 60px;
+    animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.title {
+    font-size: 36px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    color: #666;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.connection-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 24px;
+    background: rgba(72, 187, 120, 0.1);
+    border-radius: 50px;
+    font-weight: 600;
+    color: #2f855a;
+}
+
+.status-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #48bb78;
+    box-shadow: 0 0 20px #48bb78;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.8; }
+}
+
+/* Dashboard Grid */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+/* Sensor Cards */
+.sensor-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    animation: fadeInUp 0.6s ease-out;
+    animation-fill-mode: both;
+    position: relative;
+    overflow: hidden;
+}
+
+.sensor-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, transparent, currentColor, transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.soil-card::before { color: #8B4513; }
+.temp-card::before { color: #F56565; }
+.humidity-card::before { color: #4299E1; }
+
+.sensor-card:nth-child(1) { animation-delay: 0.1s; }
+.sensor-card:nth-child(2) { animation-delay: 0.2s; }
+.sensor-card:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.sensor-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.icon-wrapper {
+    width: 60px;
+    height: 60px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.icon-wrapper svg {
+    width: 30px;
+    height: 30px;
+    color: white;
+}
+
+.soil-icon {
+    background: linear-gradient(135deg, #8B4513, #D2691E);
+}
+
+.temp-icon {
+    background: linear-gradient(135deg, #F56565, #FC8181);
+}
+
+.humidity-icon {
+    background: linear-gradient(135deg, #4299E1, #63B3ED);
+}
+
+.sensor-card:hover .icon-wrapper {
+    transform: rotate(10deg) scale(1.1);
+}
+
+.card-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 3px;
+}
+
+.card-subtitle {
+    font-size: 12px;
+    color: #718096;
+}
+
+.card-body {
+    text-align: center;
+}
+
+.main-value {
+    margin-bottom: 20px;
+}
+
+.value {
+    font-size: 56px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    transition: all 0.3s ease;
+}
+
+.sensor-card:hover .value {
+    transform: scale(1.05);
+}
+
+.unit {
+    font-size: 24px;
+    color: #a0aec0;
+    font-weight: 600;
+    margin-left: 5px;
+}
+
+/* Progress Bar */
+.progress-bar {
+    width: 100%;
+    height: 12px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.progress-fill {
+    height: 100%;
+    border-radius: 10px;
+    transition: width 0.6s ease, background 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.3), 
+        transparent);
+    animation: progressShine 2s infinite;
+}
+
+@keyframes progressShine {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.soil-progress {
+    background: linear-gradient(90deg, #8B4513, #D2691E);
+}
+
+.temp-progress {
+    background: linear-gradient(90deg, #F56565, #FC8181);
+}
+
+.humidity-progress {
+    background: linear-gradient(90deg, #4299E1, #63B3ED);
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+/* Chart Container */
+.chart-container {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: fadeInUp 0.6s ease-out 0.4s;
+    animation-fill-mode: both;
+    margin-bottom: 30px;
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.chart-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 5px;
+}
+
+.chart-subtitle {
+    font-size: 14px;
+    color: #718096;
+}
+
+.last-update {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    background: rgba(102, 126, 234, 0.1);
+    border-radius: 10px;
+    color: #667eea;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.last-update svg {
+    width: 20px;
+    height: 20px;
+}
+
+.chart-wrapper {
+    position: relative;
+    height: 350px;
+}
+
+/* Footer */
+.dashboard-footer {
+    text-align: center;
+    color: white;
+    font-size: 14px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    margin-top: 30px;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN - FLAGSHIP DEVICE OPTIMIZED
+   ============================================ */
+
+/* Desktop View (1920x1080 - Standard Desktop/Laptop) */
+@media (min-width: 1441px) {
+    .container {
+        max-width: 1600px;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .title {
+        font-size: 40px;
+    }
+
+    .value {
+        font-size: 64px;
+    }
+
+    .chart-wrapper {
+        height: 400px;
+    }
+}
+
+/* Large Desktop (1440p displays) */
+@media (min-width: 1281px) and (max-width: 1440px) {
+    .container {
+        max-width: 1400px;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .value {
+        font-size: 56px;
+    }
+}
+
+/* Small Desktop / Large Laptop (1080p displays) */
+@media (min-width: 1025px) and (max-width: 1280px) {
+    .container {
+        max-width: 1200px;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+
+    .sensor-card {
+        padding: 25px;
+    }
+
+    .value {
+        font-size: 52px;
+    }
+
+    .chart-wrapper {
+        height: 350px;
+    }
+}
+
+/* ============================================
+   TABLET LANDSCAPE - iPad Pro 12.9", Galaxy Tab S8+
+   (1024x1366, 1024x768)
+   ============================================ */
+@media (min-width: 769px) and (max-width: 1024px) {
+    body {
+        padding: 15px;
+    }
+
+    .container {
+        max-width: 100%;
+    }
+
+    .dashboard-header {
+        padding: 25px;
+    }
+
+    .title {
+        font-size: 32px;
+    }
+
+    .logo-icon {
+        font-size: 50px;
+    }
+
+    .subtitle {
+        font-size: 13px;
+    }
+
+    /* 2 column grid for tablet landscape */
+    .dashboard-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    /* Third card spans full width */
+    .sensor-card:nth-child(3) {
+        grid-column: 1 / -1;
+        max-width: 600px;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .sensor-card {
+        padding: 25px;
+    }
+
+    .icon-wrapper {
+        width: 55px;
+        height: 55px;
+    }
+
+    .icon-wrapper svg {
+        width: 28px;
+        height: 28px;
+    }
+
+    .card-title {
+        font-size: 19px;
+    }
+
+    .value {
+        font-size: 48px;
+    }
+
+    .unit {
+        font-size: 22px;
+    }
+
+    .chart-container {
+        padding: 25px;
+    }
+
+    .chart-wrapper {
+        height: 320px;
+    }
+
+    .chart-title {
+        font-size: 22px;
+    }
+}
+
+/* ============================================
+   TABLET PORTRAIT - iPad Air, iPad Pro 11", Galaxy Tab S9
+   (768x1024, 820x1180)
+   ============================================ */
+@media (min-width: 601px) and (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+
+    .dashboard-header {
+        padding: 22px;
+    }
+
+    .header-content {
+        gap: 15px;
+    }
+
+    .title {
+        font-size: 28px;
+    }
+
+    .logo-icon {
+        font-size: 45px;
+    }
+
+    .subtitle {
+        font-size: 13px;
+    }
+
+    /* Single column for portrait tablets */
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .sensor-card {
+        padding: 24px;
+    }
+
+    .icon-wrapper {
+        width: 55px;
+        height: 55px;
+    }
+
+    .card-title {
+        font-size: 18px;
+    }
+
+    .value {
+        font-size: 50px;
+    }
+
+    .unit {
+        font-size: 22px;
+    }
+
+    .progress-bar {
+        height: 10px;
+    }
+
+    .chart-container {
+        padding: 24px;
+    }
+
+    .chart-wrapper {
+        height: 300px;
+    }
+
+    .chart-title {
+        font-size: 21px;
+    }
+
+    .connection-status {
+        padding: 10px 20px;
+        font-size: 13px;
+    }
+}
+
+/* ============================================
+   LARGE SMARTPHONE - iPhone 15 Pro Max, Galaxy S24 Ultra
+   (430x932, 412x915)
+   ============================================ */
+@media (min-width: 415px) and (max-width: 600px) {
+    body {
+        padding: 12px;
+    }
+
+    .dashboard-header {
+        padding: 20px;
+    }
+
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .logo-section {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .title {
+        font-size: 26px;
+    }
+
+    .logo-icon {
+        font-size: 42px;
+    }
+
+    .subtitle {
+        font-size: 12px;
+    }
+
+    .connection-status {
+        width: 100%;
+        justify-content: center;
+        padding: 10px 18px;
+        font-size: 13px;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .sensor-card {
+        padding: 22px;
+    }
+
+    .card-header {
+        gap: 12px;
+    }
+
+    .icon-wrapper {
+        width: 52px;
+        height: 52px;
+    }
+
+    .icon-wrapper svg {
+        width: 26px;
+        height: 26px;
+    }
+
+    .card-title {
+        font-size: 18px;
+    }
+
+    .card-subtitle {
+        font-size: 11px;
+    }
+
+    .value {
+        font-size: 46px;
+    }
+
+    .unit {
+        font-size: 20px;
+    }
+
+    .progress-bar {
+        height: 10px;
+    }
+
+    .status-badge {
+        padding: 7px 14px;
+        font-size: 12px;
+    }
+
+    .chart-container {
+        padding: 20px;
+    }
+
+    .chart-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .chart-title {
+        font-size: 20px;
+    }
+
+    .chart-subtitle {
+        font-size: 13px;
+    }
+
+    .last-update {
+        width: 100%;
+        justify-content: center;
+        padding: 10px 16px;
+        font-size: 13px;
+    }
+
+    .last-update svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .chart-wrapper {
+        height: 280px;
+    }
+
+    .dashboard-footer {
+        font-size: 13px;
+        padding: 18px;
+    }
+}
+
+/* ============================================
+   STANDARD SMARTPHONE - iPhone 15, Galaxy S24, Pixel 8
+   (390x844, 360x800)
+   ============================================ */
+@media (min-width: 361px) and (max-width: 414px) {
+    body {
+        padding: 10px;
+    }
+
+    .dashboard-header {
+        padding: 18px;
+    }
+
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+    }
+
+    .logo-section {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .title {
+        font-size: 24px;
+    }
+
+    .logo-icon {
+        font-size: 38px;
+    }
+
+    .subtitle {
+        font-size: 11px;
+    }
+
+    .connection-status {
+        width: 100%;
+        justify-content: center;
+        padding: 9px 16px;
+        font-size: 12px;
+    }
+
+    .status-indicator {
+        width: 10px;
+        height: 10px;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .sensor-card {
+        padding: 20px;
+    }
+
+    .card-header {
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .icon-wrapper {
+        width: 50px;
+        height: 50px;
+    }
+
+    .icon-wrapper svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    .card-title {
+        font-size: 17px;
+    }
+
+    .card-subtitle {
+        font-size: 11px;
+    }
+
+    .value {
+        font-size: 42px;
+    }
+
+    .unit {
+        font-size: 18px;
+    }
+
+    .progress-bar {
+        height: 9px;
+    }
+
+    .status-badge {
+        padding: 6px 13px;
+        font-size: 11px;
+    }
+
+    .chart-container {
+        padding: 18px;
+    }
+
+    .chart-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .chart-title {
+        font-size: 19px;
+    }
+
+    .chart-subtitle {
+        font-size: 12px;
+    }
+
+    .last-update {
+        width: 100%;
+        justify-content: center;
+        padding: 9px 14px;
+        font-size: 12px;
+    }
+
+    .last-update svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .chart-wrapper {
+        height: 260px;
+    }
+
+    .dashboard-footer {
+        font-size: 12px;
+        padding: 16px;
+    }
+}
+
+/* ============================================
+   COMPACT SMARTPHONE - iPhone SE, smaller Android phones
+   (320x568, 375x667)
+   ============================================ */
+@media (max-width: 360px) {
+    body {
+        padding: 8px;
+    }
+
+    .dashboard-header {
+        padding: 16px;
+        margin-bottom: 20px;
+    }
+
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .logo-section {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .title {
+        font-size: 20px;
+    }
+
+    .logo-icon {
+        font-size: 34px;
+    }
+
+    .subtitle {
+        font-size: 10px;
+    }
+
+    .connection-status {
+        width: 100%;
+        justify-content: center;
+        padding: 8px 14px;
+        font-size: 11px;
+    }
+
+    .status-indicator {
+        width: 9px;
+        height: 9px;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .sensor-card {
+        padding: 18px;
+    }
+
+    .card-header {
+        gap: 10px;
+        margin-bottom: 18px;
+    }
+
+    .icon-wrapper {
+        width: 46px;
+        height: 46px;
+    }
+
+    .icon-wrapper svg {
+        width: 22px;
+        height: 22px;
+    }
+
+    .card-title {
+        font-size: 16px;
+    }
+
+    .card-subtitle {
+        font-size: 10px;
+    }
+
+    .value {
+        font-size: 38px;
+    }
+
+    .unit {
+        font-size: 16px;
+    }
+
+    .progress-bar {
+        height: 8px;
+    }
+
+    .status-badge {
+        padding: 6px 12px;
+        font-size: 10px;
+    }
+
+    .chart-container {
+        padding: 16px;
+    }
+
+    .chart-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        margin-bottom: 18px;
+    }
+
+    .chart-title {
+        font-size: 17px;
+    }
+
+    .chart-subtitle {
+        font-size: 11px;
+    }
+
+    .last-update {
+        width: 100%;
+        justify-content: center;
+        padding: 8px 12px;
+        font-size: 11px;
+    }
+
+    .last-update svg {
+        width: 14px;
+        height: 14px;
+    }
+
+    .chart-wrapper {
+        height: 240px;
+    }
+
+    .dashboard-footer {
+        font-size: 11px;
+        padding: 14px;
+    }
+}
+
+/* ============================================
+   LANDSCAPE ORIENTATION OPTIMIZATIONS
+   ============================================ */
+
+/* Tablet Landscape */
+@media (min-width: 769px) and (max-width: 1024px) and (orientation: landscape) {
+    .dashboard-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .sensor-card:nth-child(3) {
+        grid-column: auto;
+        max-width: none;
+    }
+
+    .chart-wrapper {
+        height: 280px;
+    }
+}
+
+/* Smartphone Landscape */
+@media (max-width: 768px) and (orientation: landscape) and (max-height: 450px) {
+    body {
+        padding: 8px;
+    }
+
+    .dashboard-header {
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+
+    .logo-icon {
+        font-size: 32px;
+    }
+
+    .title {
+        font-size: 20px;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        margin-bottom: 15px;
+    }
+
+    .sensor-card {
+        padding: 16px;
+    }
+
+    .card-header {
+        margin-bottom: 12px;
+    }
+
+    .icon-wrapper {
+        width: 42px;
+        height: 42px;
+    }
+
+    .icon-wrapper svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .card-title {
+        font-size: 14px;
+    }
+
+    .card-subtitle {
+        font-size: 10px;
+    }
+
+    .value {
+        font-size: 32px;
+    }
+
+    .unit {
+        font-size: 14px;
+    }
+
+    .progress-bar {
+        height: 7px;
+        margin-bottom: 10px;
+    }
+
+    .status-badge {
+        padding: 5px 10px;
+        font-size: 10px;
+    }
+
+    .chart-container {
+        padding: 15px;
+    }
+
+    .chart-header {
+        margin-bottom: 12px;
+    }
+
+    .chart-title {
+        font-size: 16px;
+    }
+
+    .chart-subtitle {
+        font-size: 11px;
+    }
+
+    .chart-wrapper {
+        height: 200px;
+    }
+
+    .dashboard-footer {
+        padding: 12px;
+        font-size: 11px;
+    }
+}
