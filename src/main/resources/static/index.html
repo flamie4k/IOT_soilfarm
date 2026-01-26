@@ -22,11 +22,6 @@
                         <p class="subtitle">Real-time farm monitoring system</p>
                     </div>
                 </div>
-                <!--<div class="connection-status">
-                    <div class="status-indicator online"></div>
-                    <span>Live</span>
-                </div>
-            -->
             </div>
         </header>
 
@@ -106,6 +101,82 @@
                     </div>
                     <div class="status-badge" id="humidity-status">Loading...</div>
                 </div>
+            </div>
+        </div>
+
+        <!-- Weather Forecast Section -->
+        <div class="weather-container">
+            <!-- Current Weather -->
+            <div class="current-weather" id="currentWeather">
+                <div class="current-weather-main">
+                    <div class="weather-icon-large" id="currentWeatherIcon">
+                        ☀️
+                    </div>
+                    <div class="current-temp-info">
+                        <div class="current-temp">
+                            <span id="currentTemp" class="current-temp-value">--</span>
+                            <span class="temp-unit">°C</span>
+                        </div>
+                        <div id="currentDescription" class="weather-description">Loading...</div>
+                    </div>
+                </div>
+                
+                <div class="weather-details-grid">
+                    <div class="weather-detail-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                        </svg>
+                        <div>
+                            <div class="detail-label">Humidity</div>
+                            <div id="currentHumidity" class="detail-value">--%</div>
+                        </div>
+                    </div>
+                    
+                    <div class="weather-detail-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/>
+                        </svg>
+                        <div>
+                            <div class="detail-label">Wind Speed</div>
+                            <div id="currentWind" class="detail-value">-- m/s</div>
+                        </div>
+                    </div>
+                    
+                    <div class="weather-detail-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                            <line x1="12" y1="16" x2="12" y2="12"/>
+                        </svg>
+                        <div>
+                            <div class="detail-label">Precipitation</div>
+                            <div id="currentRain" class="detail-value">-- mm</div>
+                        </div>
+                    </div>
+                    
+                    <div class="weather-detail-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="5"/>
+                            <line x1="12" y1="1" x2="12" y2="3"/>
+                            <line x1="12" y1="21" x2="12" y2="23"/>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                            <line x1="1" y1="12" x2="3" y2="12"/>
+                            <line x1="21" y1="12" x2="23" y2="12"/>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                        </svg>
+                        <div>
+                            <div class="detail-label">UV Index</div>
+                            <div id="currentUV" class="detail-value">--</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 5-Day Forecast -->
+            <div class="forecast-grid" id="forecastGrid">
+                <!-- Forecast cards will be inserted here by JavaScript -->
+                <div class="forecast-loading">Loading forecast...</div>
             </div>
         </div>
 
